@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src",
+    "lint-fix": "npm run lint -- --fix",
+    "test": "npm run lint && npm run test:run",
+    "test:run": "jest --passWithNoTests",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "react": "^18.1.0",
