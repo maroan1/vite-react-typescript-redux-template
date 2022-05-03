@@ -6,22 +6,28 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint src",
+    "lint": "eslint",
     "lint-fix": "npm run lint -- --fix",
     "test": "npm run lint && npm run test:run",
-    "test:run": "jest --passWithNoTests",
-    "test:coverage": "jest --coverage"
+    "test:run": "vitest --passWithNoTests --reporter verbose",
+    "test:coverage": "vitest --coverage",
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/react-hooks": "^8.0.0",
+    "@testing-library/user-event": "^14.1.1",
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.3",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
     "@vitejs/plugin-react": "^1.3.2",
+    "c8": "^7.11.2",
     "eslint": "^8.14.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -36,8 +42,9 @@
     "eslint-plugin-security": "^1.5.0",
     "eslint-plugin-sonarjs": "^0.13.0",
     "eslint-plugin-unicorn": "^42.0.0",
-    "jest": "^28.0.3",
+    "jsdom": "^19.0.0",
     "typescript": "^4.6.4",
-    "vite": "^2.9.7"
+    "vite": "^2.9.7",
+    "vitest": "^0.10.1"
   }
 }
