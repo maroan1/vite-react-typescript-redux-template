@@ -1,5 +1,6 @@
 import './App.css';
 import { useAppDispatch, useAppSelector } from './hooks';
+import { incrementOne } from './models/count';
 import logo from './logo.svg';
 
 function App() {
@@ -12,10 +13,8 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
         <p>
-          <button type="button" onClick={() => dispatch.count.incrementOne()}>
-            count is:
-            {' '}
-            {count}
+          <button type="button" onClick={() => dispatch(incrementOne())}>
+            {`count is: ${count.value}`}
           </button>
         </p>
         <p>

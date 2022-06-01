@@ -1,29 +1,48 @@
-import { createModel } from '@rematch/core';
-import { RootModel } from '.';
+/* eslint-disable no-param-reassign */
+import {
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
+import type { RootState } from '../store';
 
-const count = createModel<RootModel>()({
-  state: 0,
+// Define a type for the slice state
+interface CounterState {
+  value: number
+}
+
+// Define the initial state using that type
+const initialState: CounterState = {
+  value: 0,
+};
+
+export const counter = createSlice({
+  name: 'count',
+  initialState,
   reducers: {
-    increment(state, payload: number) {
-      return state + payload;
+    increment: (state, action: PayloadAction<number>) => {
+      state.value += action.payload;
     },
-    decrement(state, payload: number) {
-      return state - payload;
+    decrement: (state, action: PayloadAction<number>) => {
+      state.value -= action.payload;
     },
-    incrementOne(state) {
-      return state + 1;
+    incrementOne: (state) => {
+      state.value += 1;
     },
-    decrementOne(state) {
-      if (state !== 0) return state - 1;
-      return state;
+    decrementOne: (state) => {
+      if (state.value > 0) state.value -= 1;
     },
+    reset: () => initialState,
   },
-  // PARA ACCIONES MÁS COMPLEJAS
-  // effects: (dispatch) => ({
-  //   incrementOne() {
-  //     dispatch.count.increment(1);
-  //   },
-  // }),
 });
 
-export default count;
+export const {
+  increment,
+  decrement,
+  incrementOne,
+  decrementOne,
+  reset,
+} = counter.actions;
+
+export const selectCount = (state: RootState) => state.count.value;
+
+export default counter.reducer;

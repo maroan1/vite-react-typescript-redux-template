@@ -3,7 +3,13 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import type { Store } from 'redux';
 
-const customRender = (ui: React.ReactElement, store: Store, options = {}) => render(ui, {
+const customRender = (ui: React.ReactElement, options = {}) => render(ui, {
+  // wrap provider(s) here if needed
+  wrapper: ({ children }) => children,
+  ...options,
+});
+
+const customRenderRematch = (ui: React.ReactElement, store: Store, options = {}) => render(ui, {
   // wrap provider(s) here if needed
   wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
   ...options,
@@ -12,4 +18,7 @@ const customRender = (ui: React.ReactElement, store: Store, options = {}) => ren
 export * from '@testing-library/react';
 export { default as userEvent } from '@testing-library/user-event';
 // override render export
-export { customRender as render };
+export {
+  customRender as render,
+  customRenderRematch as renderRematch,
+};
